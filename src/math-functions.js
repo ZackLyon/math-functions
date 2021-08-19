@@ -125,19 +125,17 @@ This function should be dynamic, accepting an array of any length.
 
 export function multiplyAnyArray(dynamicArray) { //eslint-disable-line
     
-    if(dynamicArray.length === 0) { return [undefined, `The numbers ${undefined} have a product of ${undefined}.`]}
-    if(dynamicArray.length === 1) { return [dynamicArray[0], `The numbers ${dynamicArray[0]} have a product of ${dynamicArray[0]}.`]}
+    if(dynamicArray.length === 0) { return [undefined, `The numbers ${undefined} have a product of ${undefined}.`];} // edge case with empty array
+    if(dynamicArray.length === 1) { return [dynamicArray[0], `The numbers ${dynamicArray[0]} have a product of ${dynamicArray[0]}.`];} // edge case with single item array
     
     let newString = `${dynamicArray[0]},${dynamicArray[1]},`; //Start the string of numbers with first two elements
     let product = multiply(dynamicArray.shift(), dynamicArray.shift())[0]; // multiply and remove the first two elements of array
     
     let arrLength = dynamicArray.length;
     
-    if(arrLength) {
-        for(let i = 0; i < arrLength; i++) {
-            newString = newString + `${dynamicArray[i]},`; //append number at current index to the string
-            product = multiply(product, dynamicArray[i])[0]; // multiply the product by the number at current index of dynamicArray, the function's numeric result is at index 0 of the array it returns
-        }
+    for(let i = 0; i < arrLength; i++) {
+        newString = newString + `${dynamicArray[i]},`; //append number at current index to the string
+        product = multiply(product, dynamicArray[i])[0]; // multiply the product by the number at current index of dynamicArray, the function's numeric result is at index 0 of the array it returns
     }
     
     newString = newString.slice(0, -1); // remove the last comma by using negative index (new string is from index 0 to 1 less than length)
