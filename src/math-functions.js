@@ -53,6 +53,9 @@ how to do this. However, you may continue to use the + operator for string conca
 */
 
 export function sumAndMultiplyThreeNumbers(a, b, c) { //eslint-disable-line
+    let aPlusBplusC = sum(sum(a, b)[0], c)[0];
+    let aTimesBtimesC = multiply(multiply(a, b)[0], c)[0];
+    return [aPlusBplusC, aTimesBtimesC, `${a} and ${b} and ${c} sum to ${aPlusBplusC}.`, `The product of ${a} and ${b} and ${c} is ${aTimesBtimesC}.`];
 
 }
 
