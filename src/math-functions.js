@@ -77,7 +77,7 @@ have to be resourceful to figure out how to do this. However, you may continue
 to use the + operator for string concatenation.
 */
 
-export function sumArrayWithThreeNumbers(sumArr) {
+export function sumArrayWithThreeNumbers(sumArr) { 
     let arrSum = sum(sum(sumArr[0], sumArr[1])[0], sumArr[2])[0];
     return [arrSum, `${sumArr[0]},${sumArr[1]},${sumArr[2]} was passed in as an array of numbers, and ${arrSum} is their sum.`];
 }
@@ -124,7 +124,24 @@ This function should be dynamic, accepting an array of any length.
 */
 
 export function multiplyAnyArray(dynamicArray) { //eslint-disable-line
-
+    
+    if(dynamicArray.length === 0) { return [undefined, `The numbers ${undefined} have a product of ${undefined}.`]}
+    if(dynamicArray.length === 1) { return [dynamicArray[0], `The numbers ${dynamicArray[0]} have a product of ${dynamicArray[0]}.`]}
+    
+    let newString = `${dynamicArray[0]},${dynamicArray[1]},`; //Start the string of numbers with first two elements
+    let product = multiply(dynamicArray.shift(), dynamicArray.shift())[0]; // multiply and remove the first two elements of array
+    
+    let arrLength = dynamicArray.length;
+    
+    if(arrLength) {
+        for(let i = 0; i < arrLength; i++) {
+            newString = newString + `${dynamicArray[i]},`; //append number at current index to the string
+            product = multiply(product, dynamicArray[i])[0]; // multiply the product by the number at current index of dynamicArray, the function's numeric result is at index 0 of the array it returns
+        }
+    }
+    
+    newString = newString.slice(0, -1); // remove the last comma by using negative index (new string is from index 0 to 1 less than length)
+    return [product, `The numbers ${newString} have a product of ${product}.`];
 }
 
 // Once you get the test passing, do an a-c-p cycle and synchronize the code between GitHub and your laptop. 
